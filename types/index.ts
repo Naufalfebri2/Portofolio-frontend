@@ -29,11 +29,13 @@ export interface Project {
 
 export interface Profile {
   name: string;
+  role: string | null;
   bio: string;
   photo: string | null;
   resume_url: string | null;
   phone: string | null;
   email: string | null;
+  location: string | null;
   github_url: string | null;
   linkedin_url: string | null;
   instagram_url: string | null;

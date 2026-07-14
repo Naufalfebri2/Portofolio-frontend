@@ -25,6 +25,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL?.replace("/api", "");
 
 const fallback = {
   name: "Naufal Febriansyah",
+  role: "Backend Developer",
   bio: "a Backend Developer focused on building SaaS systems and business applications using Laravel & PostgreSQL.",
   location: "South Tangerang, Indonesia",
 };
@@ -33,9 +34,16 @@ export default function Hero() {
   const { data: profile } = useProfile();
 
   const name = profile?.name || fallback.name;
+  const role = profile?.role || fallback.role;
   const bio = profile?.bio || fallback.bio;
   const location = profile?.location || fallback.location;
   const photoUrl = profile?.photo ? `${apiBaseUrl}${profile.photo}` : null;
+
+  // Split role into words so the last word gets the gradient accent,
+  // matching the original two-tone "Backend Developer" headline style.
+  const roleWords = role.trim().split(" ");
+  const roleLastWord = roleWords.pop() ?? "";
+  const roleFirstPart = roleWords.join(" ");
 
   const socials = [
     profile?.github_url && {
@@ -78,8 +86,8 @@ export default function Hero() {
       )}
 
       {location && (
-        <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-6">
-          <MapPin size={14} className="text-accent-400" />
+        <div className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 mb-6">
+          <MapPin size={14} className="text-accent-500 dark:text-accent-400" />
           <span>{location}</span>
         </div>
       )}
@@ -88,19 +96,23 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+        className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
       >
-        Backend <span className="text-gradient-accent">Developer</span>
+        {roleFirstPart && `${roleFirstPart} `}
+        <span className="text-gradient-accent">{roleLastWord}</span>
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+        className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
       >
-        Hi, I&apos;m <span className="text-white font-semibold">{name}</span>,{" "}
-        {bio}
+        Hi, I&apos;m{" "}
+        <span className="text-gray-900 dark:text-white font-semibold">
+          {name}
+        </span>
+        , {bio}
       </motion.p>
 
       <motion.div
@@ -129,7 +141,7 @@ export default function Hero() {
               .getElementById("contact")
               ?.scrollIntoView({ behavior: "smooth" });
           }}
-          className="border border-gray-700 hover:border-gray-500 text-white font-medium px-6 py-3 rounded-lg transition-colors"
+          className="border border-gray-300 dark:border-gray-700 hover:border-gray-500 text-gray-900 dark:text-white font-medium px-6 py-3 rounded-lg transition-colors"
         >
           Contact Me
         </a>
@@ -146,7 +158,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="text-gray-500 hover:text-accent-400 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-accent-500 dark:hover:text-accent-400 transition-colors"
               >
                 <Icon width={20} height={20} />
               </a>

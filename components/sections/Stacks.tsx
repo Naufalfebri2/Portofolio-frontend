@@ -31,10 +31,12 @@ const stackGroups = [
   {
     label: "Frontend",
     items: [
-      // Official brand color is pure black — overridden to white so the
-      // mark stays visible on this dark background (same treatment
-      // Vercel/GitHub use on their own dark-mode surfaces).
-      { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+      // Official brand mark is monochrome (pure black). Uses a CSS
+      // variable that flips between black/white based on the active
+      // theme, instead of a hardcoded color, so the mark stays visible
+      // in both light and dark mode (same treatment Vercel/GitHub use
+      // on their own docs).
+      { name: "Next.js", icon: SiNextdotjs, color: "var(--icon-mono)" },
       { name: "React", icon: SiReact, color: "#61DAFB" },
       { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
       { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
@@ -45,8 +47,8 @@ const stackGroups = [
     items: [
       { name: "Flutter", icon: SiFlutter, color: "#02569B" },
       { name: "Git", icon: SiGit, color: "#F05032" },
-      // Same black-override reasoning as Next.js above.
-      { name: "GitHub", icon: SiGithub, color: "#FFFFFF" },
+      // Same theme-aware reasoning as Next.js above.
+      { name: "GitHub", icon: SiGithub, color: "var(--icon-mono)" },
       { name: "VS Code", icon: VscVscode, color: "#007ACC" },
     ],
   },
@@ -62,10 +64,10 @@ export default function Stacks() {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <p className="text-sm text-accent-400 font-medium mb-2">
+        <p className="text-sm text-accent-500 dark:text-accent-400 font-medium mb-2">
           Built With Precision
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold text-white">
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">
           Core <span className="text-gradient-accent">Stack</span>
         </h2>
       </motion.div>
@@ -90,14 +92,14 @@ export default function Stacks() {
                       delay: groupIndex * 0.1 + index * 0.04,
                     }}
                     whileHover={{ y: -3 }}
-                    className="group flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-gray-800 bg-gray-900/40 hover:border-accent-500/60 transition-colors"
+                    className="group flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-800 bg-gray-100 dark:bg-gray-900/40 hover:border-accent-500/60 transition-colors"
                   >
                     <Icon
                       size={18}
                       style={{ color: item.color }}
                       className="grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                     />
-                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                    <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-950 dark:group-hover:text-white transition-colors">
                       {item.name}
                     </span>
                   </motion.div>

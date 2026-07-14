@@ -47,10 +47,12 @@ export default function ProjectDetailPage() {
   if (isError || !data) {
     return (
       <section className="max-w-4xl mx-auto px-6 pt-8 pb-24 text-center">
-        <p className="text-red-400 text-sm mb-4">Project not found.</p>
+        <p className="text-red-500 dark:text-red-400 text-sm mb-4">
+          Project not found.
+        </p>
         <Link
           href="/#projects"
-          className="text-accent-400 text-sm hover:underline inline-flex items-center gap-1.5"
+          className="text-accent-500 dark:text-accent-400 text-sm hover:underline inline-flex items-center gap-1.5"
         >
           <ArrowLeft size={14} /> Back to Home
         </Link>
@@ -70,22 +72,24 @@ export default function ProjectDetailPage() {
       >
         <Link
           href="/#projects"
-          className="text-gray-400 hover:text-accent-400 text-sm mb-8 inline-flex items-center gap-1.5 transition-colors"
+          className="text-gray-500 dark:text-gray-400 hover:text-accent-500 dark:hover:text-accent-400 text-sm mb-8 inline-flex items-center gap-1.5 transition-colors"
         >
           <ArrowLeft size={14} /> Back to all projects
         </Link>
 
         <div className="flex items-start justify-between gap-4 mb-1">
-          <h1 className="text-2xl md:text-3xl font-bold text-white">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
             {project.title}
           </h1>
-          <span className="shrink-0 text-xs border border-gray-800 text-gray-400 px-3 py-1 rounded-full whitespace-nowrap">
+          <span className="shrink-0 text-xs border border-gray-300 dark:border-gray-800 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full whitespace-nowrap">
             {project.type === "team" ? "Team Project" : "Solo Project"}
           </span>
         </div>
 
         {project.role && (
-          <p className="text-accent-400 text-sm mb-8">Role: {project.role}</p>
+          <p className="text-accent-500 dark:text-accent-400 text-sm mb-8">
+            Role: {project.role}
+          </p>
         )}
       </motion.div>
 
@@ -94,7 +98,7 @@ export default function ProjectDetailPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="relative w-full aspect-video bg-gray-900 rounded-xl overflow-hidden border border-gray-800 mb-8"
+          className="relative w-full aspect-video bg-gray-100 dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-300 dark:border-gray-800 mb-8"
         >
           <Image
             src={`${apiBaseUrl}${project.thumbnail}`}
@@ -110,7 +114,7 @@ export default function ProjectDetailPage() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.15 }}
-        className="text-gray-300 leading-relaxed mb-8"
+        className="text-gray-700 dark:text-gray-300 leading-relaxed mb-8"
       >
         {project.description}
       </motion.p>
@@ -128,7 +132,7 @@ export default function ProjectDetailPage() {
           {project.technologies.map((tech) => (
             <span
               key={tech.id}
-              className="text-sm border border-gray-800 text-gray-300 px-3 py-1.5 rounded-full"
+              className="text-sm border border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-full"
             >
               {tech.name}
             </span>
@@ -144,7 +148,7 @@ export default function ProjectDetailPage() {
           href={project.repo_url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 border border-gray-800 hover:border-accent-500/60 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors mb-14"
+          className="inline-flex items-center gap-2 border border-gray-300 dark:border-gray-800 hover:border-accent-500/60 text-gray-900 dark:text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors mb-14"
         >
           <GithubIcon width={16} height={16} />
           View Source Code
@@ -164,7 +168,7 @@ export default function ProjectDetailPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group relative w-full bg-gray-900 rounded-lg overflow-hidden border border-gray-800 break-inside-avoid"
+                className="group relative w-full bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-800 break-inside-avoid"
               >
                 <Image
                   src={`${apiBaseUrl}${image.url}`}

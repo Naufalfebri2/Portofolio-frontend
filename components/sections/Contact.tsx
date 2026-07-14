@@ -162,13 +162,13 @@ export default function Contact() {
         transition={{ duration: 0.6 }}
         className="text-center mb-14"
       >
-        <p className="text-sm text-accent-400 font-medium mb-2">
+        <p className="text-sm text-accent-500 dark:text-accent-400 font-medium mb-2">
           Have a Backend Project?
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Let&apos;s Discuss Your System Requirements
         </h2>
-        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto leading-relaxed">
           Open to internship opportunities, project collaborations, or just
           chatting about backend & system architecture.
         </p>
@@ -191,14 +191,14 @@ export default function Contact() {
                 href={link.href}
                 target={link.label !== "Email" ? "_blank" : undefined}
                 rel={link.label !== "Email" ? "noopener noreferrer" : undefined}
-                className="group flex items-center gap-3 p-4 rounded-xl border border-gray-800 bg-gray-900/40 hover:border-accent-500/60 transition-colors"
+                className="group flex items-center gap-3 p-4 rounded-xl border border-gray-300 dark:border-gray-800 bg-gray-100 dark:bg-gray-900/40 hover:border-accent-500/60 transition-colors"
               >
-                <span className="w-9 h-9 shrink-0 rounded-lg bg-accent-500/10 text-accent-400 flex items-center justify-center">
+                <span className="w-9 h-9 shrink-0 rounded-lg bg-accent-500/10 text-accent-500 dark:text-accent-400 flex items-center justify-center">
                   <Icon size={16} width={16} height={16} />
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs text-gray-500">{link.label}</p>
-                  <p className="text-sm text-white truncate group-hover:text-accent-400 transition-colors">
+                  <p className="text-sm text-gray-900 dark:text-white truncate group-hover:text-accent-500 dark:group-hover:text-accent-400 transition-colors">
                     {link.value}
                   </p>
                 </div>
@@ -206,13 +206,15 @@ export default function Contact() {
             );
           })}
 
-          <div className="flex items-center gap-3 p-4 rounded-xl border border-gray-800 bg-linear-to-br from-accent-500/10 to-cyan-400/10">
-            <span className="w-9 h-9 shrink-0 rounded-lg bg-accent-500/10 text-accent-400 flex items-center justify-center">
+          <div className="flex items-center gap-3 p-4 rounded-xl border border-gray-300 dark:border-gray-800 bg-linear-to-br from-accent-500/10 to-cyan-400/10">
+            <span className="w-9 h-9 shrink-0 rounded-lg bg-accent-500/10 text-accent-500 dark:text-accent-400 flex items-center justify-center">
               <MapPin size={16} />
             </span>
             <div>
               <p className="text-xs text-gray-500">Location</p>
-              <p className="text-sm text-white">{location}</p>
+              <p className="text-sm text-gray-900 dark:text-white">
+                {location}
+              </p>
             </div>
           </div>
         </motion.div>
@@ -226,7 +228,7 @@ export default function Contact() {
           className="lg:col-span-3"
         >
           {status === "success" ? (
-            <div className="bg-accent-500/10 border border-accent-500/30 text-accent-300 rounded-xl p-5">
+            <div className="bg-accent-500/10 border border-accent-500/30 text-accent-700 dark:text-accent-300 rounded-xl p-5">
               <p className="mb-3 text-sm leading-relaxed">
                 Thank you! Your message has been sent, I&apos;ll get back to you
                 soon.
@@ -244,39 +246,43 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">
+                  <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                     Name
                   </label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={handleChange("name")}
-                    className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
+                    className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
                   />
                   {errors.name && (
-                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                    <p className="text-red-500 dark:text-red-400 text-xs mt-1">
+                      {errors.name}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">
+                  <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={form.email}
                     onChange={handleChange("email")}
-                    className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
+                    className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
                   />
                   {errors.email && (
-                    <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                    <p className="text-red-500 dark:text-red-400 text-xs mt-1">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">
+                  <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                     Company (optional)
                   </label>
                   <input
@@ -284,25 +290,25 @@ export default function Contact() {
                     value={form.company}
                     onChange={handleChange("company")}
                     placeholder="Your company / organization name"
-                    className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm placeholder:text-gray-600 focus:border-accent-500 focus:outline-none transition-colors"
+                    className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm placeholder:text-gray-400 dark:placeholder:text-gray-600 focus:border-accent-500 focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">
+                  <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                     Subject (optional)
                   </label>
                   <input
                     type="text"
                     value={form.subject}
                     onChange={handleChange("subject")}
-                    className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
+                    className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">
+                <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                   Interview / Meeting Date
                 </label>
                 <DatePicker
@@ -312,32 +318,34 @@ export default function Contact() {
                   dateFormat="dd MMMM yyyy"
                   placeholderText="Select a date"
                   wrapperClassName="w-full"
-                  className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
+                  className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm focus:border-accent-500 focus:outline-none transition-colors"
                 />
                 {errors.eventDate && (
-                  <p className="text-red-400 text-xs mt-1">
+                  <p className="text-red-500 dark:text-red-400 text-xs mt-1">
                     {errors.eventDate}
                   </p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">
+                <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                   Message
                 </label>
                 <textarea
                   rows={4}
                   value={form.message}
                   onChange={handleChange("message")}
-                  className="w-full bg-gray-900/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:border-accent-500 focus:outline-none transition-colors resize-none"
+                  className="w-full bg-gray-100 dark:bg-gray-900/60 border border-gray-300 dark:border-gray-800 rounded-lg px-4 py-2.5 text-gray-900 dark:text-white text-sm focus:border-accent-500 focus:outline-none transition-colors resize-none"
                 />
                 {errors.message && (
-                  <p className="text-red-400 text-xs mt-1">{errors.message}</p>
+                  <p className="text-red-500 dark:text-red-400 text-xs mt-1">
+                    {errors.message}
+                  </p>
                 )}
               </div>
 
               {status === "error" && Object.keys(errors).length === 0 && (
-                <p className="text-red-400 text-sm">
+                <p className="text-red-500 dark:text-red-400 text-sm">
                   Failed to send message. Please try again in a moment.
                 </p>
               )}

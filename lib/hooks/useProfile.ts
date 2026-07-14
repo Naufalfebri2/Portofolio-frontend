@@ -3,6 +3,7 @@ import { api } from "@/lib/api";
 
 export interface Profile {
   name: string;
+  role: string | null;
   bio: string | null;
   photo: string | null;
   resume_url: string | null;

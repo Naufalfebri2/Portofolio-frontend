@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import QueryProvider from "@/components/providers/QueryProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import PageViewTracker from "@/components/analytics/PageViewTracker";
 
 const geistSans = Geist({
@@ -16,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Naufal Febriansyah — Backend Developer",
+  title: "Naufal Febriansyah — Full-Stack Developer",
   description:
-    "Portofolio Naufal Febriansyah, Backend Developer yang fokus membangun sistem SaaS dan aplikasi bisnis menggunakan Laravel & PostgreSQL.",
+    "Portfolio of Naufal Febriansyah, a Full-Stack Developer with a strong focus on backend systems, building SaaS platforms and business applications using Laravel, PostgreSQL, and Next.js.",
 };
 
 export default function RootLayout({
@@ -28,15 +29,18 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="id"
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-gray-950 text-white">
-        <PageViewTracker />
-        <QueryProvider>
-          <Navbar />
-          <main className="flex-1 pt-24 relative z-10">{children}</main>
-        </QueryProvider>
+      <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <PageViewTracker />
+          <QueryProvider>
+            <Navbar />
+            <main className="flex-1 pt-24 relative z-10">{children}</main>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

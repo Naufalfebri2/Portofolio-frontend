@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { id: "home", label: "Home" },
@@ -106,9 +107,9 @@ export default function Navbar() {
           }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className={cn(
-            "border border-gray-800 bg-gray-950/80 backdrop-blur w-full md:w-auto",
+            "border border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur w-full md:w-auto",
             scrolled || mobileOpen
-              ? "shadow-lg shadow-black/40"
+              ? "shadow-lg shadow-black/10 dark:shadow-black/40"
               : "border-x-0 border-t-0",
           )}
         >
@@ -116,7 +117,7 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setMobileOpen(false)}
-              className="font-bold text-white text-lg whitespace-nowrap"
+              className="font-bold text-gray-900 dark:text-white text-lg whitespace-nowrap"
             >
               Naufal Febriansyah.
             </Link>
@@ -134,7 +135,7 @@ export default function Navbar() {
                       "text-sm transition-colors whitespace-nowrap",
                       isActive
                         ? "text-gradient-accent font-medium"
-                        : "text-gray-300 hover:text-white",
+                        : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white",
                     )}
                   >
                     {link.label}
@@ -143,22 +144,28 @@ export default function Navbar() {
               })}
             </div>
 
-            <a
-              href="/api/resume"
-              className="hidden md:inline-block bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2 rounded-lg transition-opacity whitespace-nowrap"
-            >
-              Download CV
-            </a>
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
+              <a
+                href="/api/resume"
+                className="bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2 rounded-lg transition-opacity whitespace-nowrap"
+              >
+                Download CV
+              </a>
+            </div>
 
-            <button
-              type="button"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              className="md:hidden text-gray-300 hover:text-white transition-colors relative z-10"
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors relative z-10"
+              >
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </nav>
 
           <AnimatePresence>
@@ -183,7 +190,7 @@ export default function Navbar() {
                           "text-sm py-2.5 transition-colors",
                           isActive
                             ? "text-gradient-accent font-medium"
-                            : "text-gray-300 hover:text-white",
+                            : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white",
                         )}
                       >
                         {link.label}

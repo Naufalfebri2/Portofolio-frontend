@@ -7,7 +7,7 @@ const timeline = [
   {
     period: "2025 — Present",
     role: "Backend Developer",
-    org: "Kelolain · Project Team",
+    org: "KLolain · Project Team",
     description:
       "Built 100+ REST API endpoints for a Laravel 12 + Sanctum + PostgreSQL SaaS platform targeting Indonesian SMEs. Developed the Auth, Product, Invoice, and Owner/User Dashboard modules, a Help Center system, soft deletes across 10 tables, an SEO/Marketing module, user management for Owners, and an automated daily backup system with a custom Artisan command and Laravel Scheduler.",
     tags: ["Laravel 12", "Sanctum", "PostgreSQL", "REST API"],
@@ -61,17 +61,17 @@ export default function Experience() {
         transition={{ duration: 0.6 }}
         className="text-center mb-20"
       >
-        <p className="text-sm text-accent-400 font-medium mb-2">
+        <p className="text-sm text-accent-500 dark:text-accent-400 font-medium mb-2">
           Behind The Scenes
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold text-white">
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">
           Experience <span className="text-gradient-accent">Built</span>
         </h2>
       </motion.div>
 
       <div ref={railRef} className="relative pl-10">
         {/* Static background rail line */}
-        <div className="absolute -left-8.25 top-1.5 bottom-1.5 w-px bg-gray-800" />
+        <div className="absolute -left-8.25 top-1.5 bottom-1.5 w-px bg-gray-300 dark:bg-gray-800" />
 
         {/* The one dot that actually moves — position driven by scroll */}
         <motion.span
@@ -90,14 +90,16 @@ export default function Experience() {
           >
             {/* Passive marker for this entry — doesn't move, just a tick
                 on the rail so the moving dot has something to pass by */}
-            <span className="absolute -left-10 top-1.5 w-3.5 h-3.5 rounded-full border-2 border-gray-700 bg-gray-950" />
+            <span className="absolute -left-10 top-1.5 w-3.5 h-3.5 rounded-full border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950" />
 
             <p className="text-sm text-gray-500 mb-1">{item.period}</p>
-            <h3 className="text-xl font-semibold text-white mb-0.5">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-0.5">
               {item.role}
             </h3>
-            <p className="text-sm text-accent-400 mb-3">{item.org}</p>
-            <p className="text-gray-400 leading-relaxed mb-4 max-w-2xl">
+            <p className="text-sm text-accent-500 dark:text-accent-400 mb-3">
+              {item.org}
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4 max-w-2xl">
               {item.description}
             </p>
 
@@ -105,7 +107,7 @@ export default function Experience() {
               {item.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2.5 py-1 rounded-full border border-gray-800 text-gray-400"
+                  className="text-xs px-2.5 py-1 rounded-full border border-gray-300 dark:border-gray-800 text-gray-600 dark:text-gray-400"
                 >
                   {tag}
                 </span>
