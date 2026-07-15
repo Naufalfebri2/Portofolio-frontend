@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import QueryProvider from "@/components/providers/QueryProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import PageViewTracker from "@/components/analytics/PageViewTracker";
@@ -39,6 +40,7 @@ export default function RootLayout({
           <QueryProvider>
             <Navbar />
             <main className="flex-1 pt-24 relative z-10">{children}</main>
+            <Footer />
           </QueryProvider>
         </ThemeProvider>
       </body>
