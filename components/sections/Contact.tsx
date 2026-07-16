@@ -31,8 +31,6 @@ const fallback = {
   linkedin_url: "https://www.linkedin.com/in/naufal-febriansyah-7b75b31b5/",
 };
 
-const WHATSAPP_NUMBER = "6281385230785";
-
 interface FormState {
   name: string;
   email: string;
@@ -40,6 +38,7 @@ interface FormState {
   subject: string;
   eventDate: Date | null;
   message: string;
+  website: string; // honeypot — must stay empty
 }
 
 const initialForm: FormState = {
@@ -49,6 +48,7 @@ const initialForm: FormState = {
   subject: "",
   eventDate: null,
   message: "",
+  website: "",
 };
 
 // Map API field names (snake_case) to our FormState keys (camelCase)
@@ -118,21 +118,26 @@ export default function Contact() {
     setStatus("submitting");
 
     try {
-      await api.post("/messages", {
+      const res = await api.post("/messages", {
         name: form.name,
         email: form.email,
         company: form.company,
         subject: form.subject,
         event_date: form.eventDate ? formatDateForApi(form.eventDate) : "",
         message: form.message,
+        website: form.website, // honeypot — server silently no-ops if filled
       });
 
-      const waText = encodeURIComponent(
-        `Hi, I'm ${form.name}. I just sent you a message through your portfolio:\n\n"${form.message}"`,
-      );
-      setWhatsappUrl(
-        `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${waText}`,
-      );
+      const waUrl = res.data?.whatsapp_url || "";
+
+      if (waUrl) {
+        const waText = encodeURIComponent(
+          `Hi, I'm ${form.name}. I just sent you a message through your portfolio:\n\n"${form.message}"`,
+        );
+        setWhatsappUrl(
+          waUrl.includes("text=") ? waUrl : `${waUrl}&text=${waText}`,
+        );
+      }
 
       setForm(initialForm);
       setStatus("success");
@@ -233,17 +238,36 @@ export default function Contact() {
                 Thank you! Your message has been sent, I&apos;ll get back to you
                 soon.
               </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2 rounded-lg transition-opacity"
-              >
-                Continue via WhatsApp
-              </a>
+              {whatsappUrl && (
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2 rounded-lg transition-opacity"
+                >
+                  Continue via WhatsApp
+                </a>
+              )}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot field: hidden from real users via off-screen
+                  positioning (not display:none — some bots specifically
+                  skip fields hidden that way), aria-hidden + tabIndex=-1
+                  so screen readers and keyboard navigation skip it too. */}
+              <div className="absolute left-[-9999px]" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={handleChange("website")}
+                />
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
