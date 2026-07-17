@@ -15,6 +15,8 @@ const navLinks = [
   { id: "contact", label: "Contact" },
 ];
 
+const resumeUrl = `${process.env.NEXT_PUBLIC_API_URL?.replace("/api", "")}/resume/download`;
+
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -147,7 +149,9 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-3">
               <ThemeToggle />
               <a
-                href="/api/resume"
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2 rounded-lg transition-opacity whitespace-nowrap"
               >
                 Download CV
@@ -198,7 +202,9 @@ export default function Navbar() {
                     );
                   })}
                   <a
-                    href="/api/resume"
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
                     className="mt-3 text-center bg-gradient-accent hover:opacity-90 text-gray-950 text-sm font-medium px-4 py-2.5 rounded-lg transition-opacity"
                   >
