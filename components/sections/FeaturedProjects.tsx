@@ -37,10 +37,15 @@ function SectionHeading() {
   );
 }
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({
+  initialProjects,
+}: {
+  initialProjects?: ProjectsResponse;
+}) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["projects", "featured"],
     queryFn: fetchProjects,
+    initialData: initialProjects,
   });
 
   if (isLoading) {

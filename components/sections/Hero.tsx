@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import { useProfile } from "@/lib/hooks/useProfile";
+import { useProfile, type Profile } from "@/lib/hooks/useProfile";
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -30,8 +30,8 @@ const fallback = {
   location: "South Tangerang, Indonesia",
 };
 
-export default function Hero() {
-  const { data: profile } = useProfile();
+export default function Hero({ initialProfile }: { initialProfile?: Profile }) {
+  const { data: profile } = useProfile(initialProfile);
 
   const name = profile?.name || fallback.name;
   const role = profile?.role || fallback.role;

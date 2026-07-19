@@ -24,10 +24,11 @@ async function fetchProfile(): Promise<Profile> {
   return res.data.data;
 }
 
-export function useProfile() {
+export function useProfile(initialData?: Profile) {
   return useQuery({
     queryKey: ["profile"],
     queryFn: fetchProfile,
     staleTime: 5 * 60 * 1000, // data profil jarang berubah, cache 5 menit
+    initialData,
   });
 }

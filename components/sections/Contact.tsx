@@ -6,7 +6,7 @@ import { Mail, MapPin, Loader2 } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { api } from "@/lib/api";
-import { useProfile } from "@/lib/hooks/useProfile";
+import { useProfile, type Profile } from "@/lib/hooks/useProfile";
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -66,8 +66,12 @@ function formatDateForApi(date: Date): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export default function Contact() {
-  const { data: profile } = useProfile();
+export default function Contact({
+  initialProfile,
+}: {
+  initialProfile?: Profile;
+}) {
+  const { data: profile } = useProfile(initialProfile);
 
   const email = profile?.email || fallback.email;
   const location = profile?.location || fallback.location;
